@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>钢琴-音准测试</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas class="frequency-bars"></canvas>
+    <div class="meter">
+        <div class="meter-dot"></div>
+        <div class="meter-pointer"></div>
+    </div>
+    <div class="notes">
+        <div class="notes-list"></div>
+        <div class="frequency">
+            <span>当前值:</span>
+            <div class="current-frequency"></div> <span>Hz</span>
+        </div>
+        <div class="frequency">
+            <span>标准值:</span>
+            <div class="standard-frequency"></div> <span>Hz</span>
+        </div>
+    </div>
+    <!-- <script src="https://cdn.bootcss.com/sweetalert/2.1.0/sweetalert.min.js"></script> -->
+    <script src="lib/aubio.js"></script>
+    <script src="lib/app.js"></script>
+
+    <script>
+        const piano_notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+        const middleA = 440
+        const middleAIndex = 57 // A4 12*4 + 9
+        const notes = []
+        const step = Math.pow(2, 1 / 12)
+        for (let i = 1; i < 9; i++) {
+            for (let j = 0; j < piano_notes.length; j++) {
+                var item = piano_notes[j];
+                var index = i * 12 + j
+                var frequency = middleA * Math.pow(step, index - middleAIndex)
+                notes.push({
+                    name: item[0],
+                    upper: item[1] || '',
+                    lower: i,
+                    frequency: frequency,
+                    cents: 0,
+                    value: index
+                })
+            }
+
+        }
+
+        console.log(notes)
+
+        const app = new Application()
+
+        app.notes.allowPlay = true
+
+        app.notes.setNotes(notes)
+
+        app.start()
+    </script>
+</body>
+
+</html>

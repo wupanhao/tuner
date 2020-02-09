@@ -1,0 +1,23 @@
+{
+  "name": "tuner",
+  "version": "1.0.0",
+  "description": "tuner based on aubio.js",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "tuner",
+    "audio",
+    "aubio"
+  ],
+  "author": "Panhao Wu",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}

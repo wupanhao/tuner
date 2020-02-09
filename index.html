@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>古琴-正调定弦</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas class="frequency-bars"></canvas>
+    <div class="meter">
+        <div class="meter-dot"></div>
+        <div class="meter-pointer"></div>
+    </div>
+    <div class="notes">
+        <div class="notes-list"></div>
+        <div class="frequency">
+            <span>当前值:</span>
+            <div class="current-frequency"></div> <span>Hz</span>
+        </div>
+        <div class="frequency">
+            <span>标准值:</span>
+            <div class="standard-frequency"></div> <span>Hz</span>
+        </div>
+    </div>
+    <!-- <script src="https://cdn.bootcss.com/sweetalert/2.1.0/sweetalert.min.js"></script> -->
+    <script src="lib/aubio.js"></script>
+    <script src="lib/app.js"></script>
+
+    <script>
+        const guqin_nomal = [
+            ['C ', '一', '弦', 65.41],
+            ['D ', '二', '弦', 73.42],
+            ['F ', '三', '弦', 87.31],
+            ['G ', '四', '弦', 98],
+            ['A ', '五', '弦', 110],
+            ['C', '六', '弦', 130.81],
+            ['D', '七', '弦', 146.83]
+        ]
+
+        const notes = guqin_nomal.map((item, index) => {
+            return {
+                name: item[0],
+                upper: item[1],
+                lower: item[2],
+                frequency: item[3],
+                cents: 0,
+                value: index
+            }
+        })
+
+
+        const app = new Application()
+
+        app.notes.allowPlay = false
+
+        app.notes.setNotes(notes)
+
+        app.start()
+    </script>
+</body>
+
+</html>
